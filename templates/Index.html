@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estoque</title>
-    <link rel="stylesheet" href="{%static 'css/index.css'%}">
+    <link rel="stylesheet" href="{%static 'css/style.css'%}">
 </head>
 <body>
     <div class="container">
@@ -14,14 +14,14 @@
             <div class="col col-1">código</div>
             <div class="col col-2">Nome</div>
             <div class="col col-3">Preço</div>
-            <div class="col col-3">quantidade em estoque</div>
+            <div class="col col-3">em estoque</div>
             <div class="col col-4">descrição</div>
           </li>
 
           {%for item in itens%}
             <li class="table-row">
                 <div class="col col-1" data-label="codigo">{{item.codigo}}</div>
-                <div class="col col-2" data-label="Nome">{{item.nome}}</div>
+                <div class="col col-2" data-label="Nome"><a href="{%url 'detalhes_produto' item.id%}">{{item.nome}}</a></div>
                 <div class="col col-3" data-label="preço">{{item.preco}}</div>
                 <div class="col col-4" data-label="unidades em estoque">{{item.quantidade_estoque}}</div>
                 <div class="col col-4" data-label="unidades em estoque">{{item.desc|slice:":15"}}</div>

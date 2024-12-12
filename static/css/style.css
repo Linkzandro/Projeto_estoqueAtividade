@@ -1,6 +1,10 @@
 body {
     font-family: 'lato', sans-serif;
   }
+  a{
+    text-decoration: none;
+    color:#6C7A89;
+  }
   .container {
     max-width: 1000px;
     margin-left: auto;
@@ -76,4 +80,44 @@ body {
         }
       }
     }
+  }
+
+  .categoria{
+    background-color: #95A5A6;
+    border-radius: 0.5rem;
+    display: inline;
+    padding: 0.5rem;
+    color: #ffffff;
+    position: relative;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  hr{
+    border: none;
+    color: #95A5A6;
+    background-color: #95A5A6;
+    height: 4px;
+  }
+
+
+
+  .categoria:hover .tooltiptext{
+    top: -100%;
+    visibility: visible;
+    opacity: 1;
+  }
+  .tooltiptext{
+    position: absolute;
+    left: 50%;
+    top: 0%;
+    transform: translate(-50%);
+    background-color: #000000;
+    color: #ffffff;
+    padding: 0.2rem 0.3rem;
+    border-radius: 0.5rem;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+
   }

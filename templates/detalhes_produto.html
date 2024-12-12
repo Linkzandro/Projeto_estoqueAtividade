@@ -1,0 +1,37 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estoque</title>
+    <link rel="stylesheet" href="{%static 'css/style.css'%}">
+</head>
+<body>
+    <div class="container">
+        <h2>Visão Geral</h2>
+        <p>id produto: {{item.id}}</p>
+        <p>nome produto: {{item.nome}}</p>
+        <p>descrição produto: {{item.desc}}</p>
+        <p>preço produto: {{item.preco}}</p>
+        <p>unidades em estoque: {{item.quantidade_estoque}}</p>
+        
+        
+        <hr>
+        <h2>Fornecedor</h2>
+        <p>nome do fornecedor: {{item.fornecedor.nome_fornecedor}}</p>
+        <p>email fornecedor: {{item.fornecedor.email}}</p>
+
+        <hr>
+        <h2>Categorias</h2>
+
+        {%for categoria in item.categoria.all%}
+            <p class="categoria">{{categoria}}
+                <span class="tooltiptext">setor {{categoria.setor}}</span>
+            </p>
+        {%endfor%}
+        
+        
+    </div>
+</body>
+</html>
