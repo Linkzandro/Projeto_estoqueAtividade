@@ -1,0 +1,35 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estoque</title>
+    <link rel="stylesheet" href="{%static 'css/style.css'%}">
+</head>
+<body>
+    <div class="container">
+        <ul class="responsive-table">
+          <li class="table-header">
+            <div class="col col-1">código</div>
+            <div class="col col-2">Nome</div>
+            <div class="col col-3">Email</div>
+          </li>
+
+          {%for item in itens%}
+            <li class="table-row">
+                <div class="col col-1" data-label="codigo">{{item.id}}</div>
+                <div class="col col-2" data-label="Nome">{{item.nome_fornecedor}}</div>
+                <div class="col col-3" data-label="preço">{{item.email}}</div>
+            </li>
+          {%endfor%}
+        </ul>
+
+        
+          <a href="{%url 'Index'%}">ir para index</a>
+          <br>
+          <a href="{%url 'categorias'%}"> ir para categorias</a>
+      </div>
+
+</body>
+</html>
