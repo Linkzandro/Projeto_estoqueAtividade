@@ -13,6 +13,7 @@
             <div class="col col-3">Preço</div>
             <div class="col col-3">em estoque</div>
             <div class="col col-4">descrição</div>
+            <div class="col col4">excluir</div>
           </li>
 
           {%for item in itens%}
@@ -22,6 +23,7 @@
                 <div class="col col-3" data-label="preço">{{item.preco}}</div>
                 <div class="col col-4" data-label="unidades em estoque">{{item.quantidade_estoque}}</div>
                 <div class="col col-4" data-label="unidades em estoque">{{item.desc|slice:":15"}}</div>
+                <div class="col col4"><a href="{%url 'excluir_produto' item.id%}">excluir</a></div>
             </li>
           {%endfor%}
         </ul>

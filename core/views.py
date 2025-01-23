@@ -32,3 +32,8 @@ def cadastrar_produtos(request):
             return redirect('Index')
     form=ProdutoForm()
     return render(request,'core/cadastrar_produtos.html',{'form':form})
+
+def excluir_produto(request,produto_pk):
+    produto=Produto.objects.get(id=produto_pk)
+    produto.delete()
+    return redirect('Index')
