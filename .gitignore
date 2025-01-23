@@ -1,5 +1,7 @@
 # Created by https://www.gitignore.io
 
+venv/
+
 ### OSX ###
 .DS_Store
 .AppleDouble
@@ -86,4 +88,3 @@ __pycache__/
 local_settings.py
 
 .env
-db.sqlite3
