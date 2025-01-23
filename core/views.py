@@ -23,7 +23,9 @@ def DetalhesProduto(request,produto_pk):
     return render(request,'core/detalhes_produto.html',{'item':item})
 
 def cadastrar_produtos(request):
+    
     if request.method=='POST':
+        
         form=ProdutoForm(request.POST)
         if form.is_valid():
             form.save()

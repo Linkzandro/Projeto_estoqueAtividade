@@ -7,5 +7,3 @@ class ProdutoForm(forms.ModelForm):
         model=Produto
         fields='__all__'
         exclude=['data_criacao']
-
-    categoria=forms.ModelChoiceField(queryset=Categoria.objects.all(),widget=forms.CheckboxSelectMultiple())
