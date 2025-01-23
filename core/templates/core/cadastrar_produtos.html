@@ -1,0 +1,52 @@
+{%extends 'base.html'%}
+{%load static%}
+
+
+{%block title%}Cadastrar Produtos{%endblock%}
+
+{%block content%}
+<div class="container">
+    <form action="{%url 'cadastrar_produtos'%}" method="post">
+        {%csrf_token%}
+
+        <div class="form-line">
+            <div class="form-line">
+                {{form.nome.label}}{{form.nome}}
+            </div>
+
+            <div class="form-line">
+                {{form.codigo.label}}{{form.codigo}}
+            </div>
+        </div>
+
+        <div class="form-line">
+            {{form.desc.label}}{{form.desc}}
+        </div>
+
+        <div class="form-line">
+            <div class="form-line">
+                {{form.preco.label}}{{form.preco}}
+            </div>
+
+            <div class="form-line">
+                {{form.quantidade_estoque.label}}{{form.quantidade_estoque}}
+            </div>
+
+            <div class="form-line">
+                {{form.fornecedor.label}}{{form.fornecedor}}
+            </div>
+        </div>
+
+        <div class="form-line">
+            {{form.categoria.label}}
+            {% for f in form.categoria%}
+                {{f}}
+            {%endfor%}
+        </div>
+        <button type="submit">Cadastrar</button>
+    </form>
+</div>
+
+
+
+{%endblock%}

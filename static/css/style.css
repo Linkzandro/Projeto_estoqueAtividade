@@ -121,3 +121,12 @@ body {
     transition: opacity 0.5s ease;
 
   }
+
+  form div{
+    padding: .25rem;
+  }
+
+  form .form-line{
+    display: flex;
+    gap: .25rem;
+  }
