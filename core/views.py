@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from .models import Produto,Fornecedor,Categoria
-from .forms import ProdutoForm
+from .forms import ProdutoForm,CategoriaForm,FornecedorForm
 
 def Index(request):
     produtos=Produto.objects.all().order_by('-data_criacao')
@@ -35,5 +35,37 @@ def cadastrar_produtos(request):
 
 def excluir_produto(request,produto_pk):
     produto=Produto.objects.get(id=produto_pk)
+    produto.delete()
+    return redirect('Index')
+
+def cadastrar_categorias(request):
+    if request.method=='POST':
+        
+        form=CategoriaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('Index')
+    form=CategoriaForm()
+    return render(request,'core/cadastrar_categoria.html',{'form':form})
+
+def excluir_categorias(request,categorias_pk):
+    produto=Categoria.objects.get(id=categorias_pk)
+    produto.delete()
+    return redirect('Index')
+
+def cadastrar_fornecedores(request):
+    if request.method=='POST':
+        
+        form=FornecedorForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('Index')
+        else:
+            print(form.errors)
+    form=FornecedorForm()
+    return render(request,'core/cadastrar_fornecedor.html',{'form':form})
+
+def excluir_fornecedores(request,fornecedores_pk):
+    produto=Fornecedor.objects.get(id=fornecedores_pk)
     produto.delete()
     return redirect('Index')

@@ -11,6 +11,7 @@
             <div class="col col-1">código</div>
             <div class="col col-2">Nome</div>
             <div class="col col-3">Email</div>
+            <div class="col col4">excluir</div>
           </li>
 
           {%for item in itens%}
@@ -18,6 +19,7 @@
                 <div class="col col-1" data-label="codigo">{{item.id}}</div>
                 <div class="col col-2" data-label="Nome">{{item.nome_fornecedor}}</div>
                 <div class="col col-3" data-label="preço">{{item.email}}</div>
+                <div class="col col4"><a href="{%url 'excluir_fornecedores' item.id%}">excluir</a></div>
             </li>
           {%endfor%}
         </ul>
@@ -26,6 +28,12 @@
           <a href="{%url 'Index'%}">ir para produtos</a>
           <br>
           <a href="{%url 'categorias'%}"> ir para categorias</a>
+          <br>
+          <a href="{%url 'cadastrar_produtos'%}">cadastrar produto</a>
+          <br>
+          <a href="{%url 'cadastrar_categorias'%}">cadastrar categoria</a>
+          <br>
+          <a href="{%url 'cadastrar_fornecedores'%}">cadastrar fornecedor</a>
       </div>
 
       {%endblock%}
