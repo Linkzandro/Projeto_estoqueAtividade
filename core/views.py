@@ -26,11 +26,10 @@ def cadastrar_produtos(request):
     
     if request.method=='POST':
         
-        form=ProdutoForm(request.POST)
+        form=ProdutoForm(request.POST or None)
         if form.is_valid():
             form.save()
             return redirect('Index')
-    form=ProdutoForm()
     return render(request,'core/cadastrar_produtos.html',{'form':form})
 
 def excluir_produto(request,produto_pk):
@@ -60,8 +59,6 @@ def cadastrar_fornecedores(request):
         if form.is_valid():
             form.save()
             return redirect('Index')
-        else:
-            print(form.errors)
     form=FornecedorForm()
     return render(request,'core/cadastrar_fornecedor.html',{'form':form})
 

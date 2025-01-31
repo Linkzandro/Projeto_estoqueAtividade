@@ -8,7 +8,7 @@
 <div class="container">
     <form action="{%url 'cadastrar_produtos'%}" method="post">
         {%csrf_token%}
-
+        {{form.errors}}
         <div class="form-line">
             <div class="form-line">
                 {{form.nome.label}}{{form.nome}}
