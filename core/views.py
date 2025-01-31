@@ -1,29 +1,32 @@
 from django.shortcuts import render,redirect
 from .models import Produto,Fornecedor,Categoria
 from .forms import ProdutoForm,CategoriaForm,FornecedorForm
+from django.views.generic import ListView,DetailView
 
-def Index(request):
-    produtos=Produto.objects.all().order_by('-data_criacao')
-    context={'itens':produtos}
-    return render(request,'core/Index.html',context)
+class Index(ListView):
+    model=Produto
+    template_name='core/Index.html' 
+    context_object_name='itens'
 
 
-def ListarFornecedores(request):
-    fornecedores=Fornecedor.objects.all()
-    context={'itens':fornecedores}
-    return render(request,'core/fornecedores.html',context)
+class ListarFornecedores(ListView):
+    model=Fornecedor
+    template_name='core/fornecedores.html' 
+    context_object_name='itens'
 
-def ListarCategorias(request):
-    categorias=Categoria.objects.all()
-    context={'itens':categorias}
-    return render(request,'core/categorias.html',context)
 
-def DetalhesProduto(request,produto_pk):
-    item=Produto.objects.get(id=produto_pk)
-    return render(request,'core/detalhes_produto.html',{'item':item})
+class ListarCategorias(ListView):
+    model=Categoria
+    template_name='core/categorias.html' 
+    context_object_name='itens'
+
+class DetalhesProduto(DetailView):
+    pk_url_kwarg='produto_pk'
+    model=Produto
+    context_object_name='item'
+    template_name='core/detalhes_produto.html'
 
 def cadastrar_produtos(request):
-    
     if request.method=='POST':
         
         form=ProdutoForm(request.POST or None)
