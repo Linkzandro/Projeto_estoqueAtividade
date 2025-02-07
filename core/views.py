@@ -35,6 +35,7 @@ class Index(ListView):
             if navform.cleaned_data.get('maximo'):
                 queryset=queryset.filter(preco__lte=navform.cleaned_data.get('maximo'))
 
+        queryset=queryset.order_by('-id')
         return queryset
         
 
