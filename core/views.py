@@ -8,7 +8,7 @@ class Index(ListView):
     model=Produto
     template_name='core/Index.html' 
     context_object_name='itens'
-    pa
+    paginate_by=5
 
     def get_context_data(self, **kwargs):
         context= super().get_context_data(**kwargs)
@@ -62,6 +62,7 @@ def cadastrar_produtos(request):
         if form.is_valid():
             form.save()
             return redirect('Index')
+    form=ProdutoForm()
     return render(request,'core/cadastrar_produtos.html',{'form':form})
 
 def excluir_produto(request,produto_pk):
