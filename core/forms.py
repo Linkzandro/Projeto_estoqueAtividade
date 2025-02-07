@@ -43,6 +43,6 @@ class FornecedorForm(forms.ModelForm):
         
 
 class PesquisaForm(forms.Form):
-    pesquisa=forms.CharField(max_length=150)
+    pesquisa=forms.CharField(max_length=150,required=False)
     minimo=forms.IntegerField(required=False)
     maximo=forms.IntegerField(required=False)

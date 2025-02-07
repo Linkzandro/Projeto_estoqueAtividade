@@ -8,7 +8,7 @@ class Index(ListView):
     model=Produto
     template_name='core/Index.html' 
     context_object_name='itens'
-
+    pa
 
     def get_context_data(self, **kwargs):
         context= super().get_context_data(**kwargs)
@@ -17,17 +17,23 @@ class Index(ListView):
     
     def get_queryset(self) :
         
-        navform=PesquisaForm(self.request.GET)
+        navform=PesquisaForm(self.request.GET or None)
+        queryset=Produto.objects.all()
+
         if navform.is_valid():
-            print('valido')
-            queryset=Produto.objects.filter(nome__icontains=navform.cleaned_data.get('pesquisa'))
-            if(navform.cleaned_data.get('maximo')!=0):
-                queryset.filter(preco__range=(navform.cleaned_data.get('minimo'),navform.cleaned_data.get('maximo')))
+
+            if navform.cleaned_data.get('pesquisa').strip()!='':
+                queryset=queryset.filter(nome__icontains=navform.cleaned_data.get('pesquisa'))
+            if navform.cleaned_data.get('maximo') and navform.cleaned_data.get('minimo'):
+                queryset=queryset.filter(preco__range=(navform.cleaned_data.get('minimo'),navform.cleaned_data.get('maximo')))
                 return queryset
             
-            queryset.filter(preco__gte=navform.cleaned_data.get('minimo'))
-        else:
-            queryset=Produto.objects.all()
+            if navform.cleaned_data.get('minimo'):
+                queryset=queryset.filter(preco__gte=navform.cleaned_data.get('minimo'))
+                return queryset
+
+            if navform.cleaned_data.get('maximo'):
+                queryset=queryset.filter(preco__lte=navform.cleaned_data.get('maximo'))
 
         return queryset
         
