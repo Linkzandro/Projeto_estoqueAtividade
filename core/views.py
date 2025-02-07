@@ -1,13 +1,42 @@
+
 from django.shortcuts import render,redirect
 from .models import Produto,Fornecedor,Categoria
-from .forms import ProdutoForm,CategoriaForm,FornecedorForm
-from django.views.generic import ListView,DetailView
+from .forms import ProdutoForm,CategoriaForm,FornecedorForm,PesquisaForm
+from django.views.generic import ListView,DetailView,FormView
 
 class Index(ListView):
     model=Produto
     template_name='core/Index.html' 
     context_object_name='itens'
+    paginate_by=5
 
+    def get_context_data(self, **kwargs):
+        context= super().get_context_data(**kwargs)
+        context['navForm']=PesquisaForm()
+        return context
+    
+    def get_queryset(self) :
+        
+        navform=PesquisaForm(self.request.GET or None)
+        queryset=Produto.objects.all()
+
+        if navform.is_valid():
+
+            if navform.cleaned_data.get('pesquisa').strip()!='':
+                queryset=queryset.filter(nome__icontains=navform.cleaned_data.get('pesquisa'))
+            if navform.cleaned_data.get('maximo') and navform.cleaned_data.get('minimo'):
+                queryset=queryset.filter(preco__range=(navform.cleaned_data.get('minimo'),navform.cleaned_data.get('maximo')))
+                return queryset
+            
+            if navform.cleaned_data.get('minimo'):
+                queryset=queryset.filter(preco__gte=navform.cleaned_data.get('minimo'))
+                return queryset
+
+            if navform.cleaned_data.get('maximo'):
+                queryset=queryset.filter(preco__lte=navform.cleaned_data.get('maximo'))
+
+        return queryset
+        
 
 class ListarFornecedores(ListView):
     model=Fornecedor
@@ -33,6 +62,7 @@ def cadastrar_produtos(request):
         if form.is_valid():
             form.save()
             return redirect('Index')
+    form=ProdutoForm()
     return render(request,'core/cadastrar_produtos.html',{'form':form})
 
 def excluir_produto(request,produto_pk):
