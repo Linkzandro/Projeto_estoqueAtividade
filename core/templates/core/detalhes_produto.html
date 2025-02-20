@@ -16,7 +16,12 @@
         <p>preço produto: {{item.preco}}</p>
         <p>unidades em estoque: {{item.quantidade_estoque}}</p>
         
-        
+
+        {%if item.foto%}
+        <div>
+            <img src="{{item.foto.url}}" alt="">
+        </div>
+        {%endif%}
         <hr>
         <h2>Fornecedor</h2>
         <p>nome do fornecedor: {{item.fornecedor.nome_fornecedor}}</p>

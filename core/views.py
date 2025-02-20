@@ -27,9 +27,9 @@ class DetalhesProduto(DetailView):
     template_name='core/detalhes_produto.html'
 
 def cadastrar_produtos(request):
+    form=ProdutoForm()
     if request.method=='POST':
-        
-        form=ProdutoForm(request.POST or None)
+        form=ProdutoForm(request.POST or None,request.FILES)
         if form.is_valid():
             form.save()
             return redirect('Index')

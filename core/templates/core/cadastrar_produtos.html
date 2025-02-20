@@ -6,7 +6,7 @@
 
 {%block content%}
 <div class="container">
-    <form action="{%url 'cadastrar_produtos'%}" method="post">
+    <form action="{%url 'cadastrar_produtos'%}" method="post" enctype="multipart/form-data">
         {%csrf_token%}
         {{form.errors}}
         <div class="form-line">
@@ -40,6 +40,11 @@
         <div class="form-line">
             {{form.categoria.label}}
             {{form.categoria}}
+
+        </div>
+        <div class="form-line">
+            {{form.foto.label}}
+            {{form.foto}}
 
         </div>
         <button type="submit">Cadastrar</button>

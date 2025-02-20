@@ -22,6 +22,8 @@ class Produto(models.Model):
     preco=models.DecimalField(max_digits=18,decimal_places=2)
     quantidade_estoque=models.IntegerField()
     data_criacao=models.DateField(default=datetime.now)
+    foto=models.ImageField(null=True, blank=True, upload_to='produtos')
+
 
     fornecedor=models.ForeignKey(Fornecedor,on_delete=models.CASCADE,blank=True,null=True)
     categoria=models.ManyToManyField(Categoria)
