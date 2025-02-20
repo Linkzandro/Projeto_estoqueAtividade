@@ -3,6 +3,7 @@ from django.shortcuts import render,redirect
 from .models import Produto,Fornecedor,Categoria
 from .forms import ProdutoForm,CategoriaForm,FornecedorForm,PesquisaForm
 from django.views.generic import ListView,DetailView,FormView
+from django.contrib import messages
 
 class Index(ListView):
     model=Produto
@@ -61,7 +62,10 @@ def cadastrar_produtos(request):
         form=ProdutoForm(request.POST or None,request.FILES)
         if form.is_valid():
             form.save()
+            messages.success(request,'Produto adicionado com sucesso')
             return redirect('Index')
+        else:
+            messages.error(request, 'erro ao cadastrar produto')
     form=ProdutoForm()
     return render(request,'core/cadastrar_produtos.html',{'form':form})
 

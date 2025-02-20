@@ -5,6 +5,7 @@
 {%block title%}Cadastrar Produtos{%endblock%}
 
 {%block content%}
+
 <div class="container">
     <form action="{%url 'cadastrar_produtos'%}" method="post" enctype="multipart/form-data">
         {%csrf_token%}
